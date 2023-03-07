@@ -1,71 +1,39 @@
 
-
-import './App.css';
 import { Component } from 'react';
+import {Routes , Route} from 'react-router-dom';
+import App from './component/home';
+import About from './component/about';
+import Contact from './component/contact';
+import Service from './component/signup';
+import Table from './component/table';
+import New from './component/new';
 
-class App extends Component {
-  constructor() {
-    super();
 
-    this.state = {
-         users:[],
-         isloading:true,
-         filterdata:'',
-         inputvalue:'',
-         area:'List of Users'
-    }
-  }
-  componentDidMount() {
-
-fetch('https://jsonplaceholder.typicode.com/users')
- .then((response) => response.json())
- .then(namelist => {
-    this.setState({ users:namelist,isloading:false });
-})
-  }
+class Approute extends Component {
+  
   render(){
-    const filter=this.state.users.filter((item)=>{return item.name.toLocaleLowerCase().includes(this.state.filterdata.toLocaleLowerCase())})
-
-    console.log(filter)
-    if (this.state.isloading){
-      return <h1>isloading.....</h1>
-    }
      return(
-      <div>
-        <h1>{this.state.area}</h1>
-          <input type='text' onChange={(e) => this.setState({filterdata:e.target.value})}placeholder='What are you searching for' />
-          <div className='Container'>
-          {
-            filter.map((data) => {
-              return(
-              
-                
-              <div className='list'>
-                <h1 key={data.id}>Name:{data.name}</h1>
-                <p>Id:{data.id}</p>
-                <p>Username:{data.username}</p>
-                <p>Email:{data.email}</p></div>
+<Routes>
+    <Route path="home" index element={<App/>}/>
+    <Route path="about"  element={<About/>}/>
+    <Route path="contact" element={<Contact/>}/>
+    <Route path="signup" element={<Service/>}/>
+    <Route path="table" element={<Table/>}/>
+    <Route path="new" element={<New/>}/>
+    
 
-                )
-              
-            })
-          }
-          
-          </div>
-        </div>
-        
+</Routes>
+
      )
   }
 }
 
- export default App; 
+ export default Approute; 
 
 
 
 
 
-
-    
 
 
 
